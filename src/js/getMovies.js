@@ -26,7 +26,9 @@ const getMovies = async (query) => {
 			const errorText = await httpResponse.text();
 			console.error("Error response body:", errorText);
 			// Decida o que retornar em caso de erro (array vazio, undefined, ou lançar um erro)
-			throw new Error(`API request failed with status ${httpResponse.status}`);
+			throw new Error(
+				`API request failed with status ${httpResponse.status}`
+			);
 		}
 
 		// 3. Se a resposta foi OK, converta o corpo da resposta para JSON
@@ -48,4 +50,4 @@ const getMovies = async (query) => {
 
 export { getMovies };
 
-// getMovies("ainda"); /* teste de consumo da api bem sucedido */
+// getMovies("ainda estou"); /* teste de consumo da api bem sucedido */
