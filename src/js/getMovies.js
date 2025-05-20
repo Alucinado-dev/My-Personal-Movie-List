@@ -1,14 +1,13 @@
-const apiKey =
-	"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMGQzZmY5MTNjZDY0MjdmM2JlMjgwMGM2M2ViYzAxNSIsIm5iZiI6MTc0NzYwNjU2NS44MTEsInN1YiI6IjY4MmE1YzI1N2Q1Y2ZiZTk2YjBiZDU4YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.li8PpIKErHiaYiGeYX7F-GvAypsaIpcO2e1L_zKfAa0";
+const apiAccessToken = process.env.TMDB_API_ACCESS_TOKEN;
 const apiUrl = "https://api.themoviedb.org/3";
 
 const getMovies = async (query) => {
-	const url = `${apiUrl}/search/movie?api_key=${apiKey}&query=${query}&include_adult=false&language=pt-BR&page=1`;
+	const url = `${apiUrl}/search/movie?query=${query}&include_adult=false&language=pt-BR&page=1`;
 	const options = {
 		method: "GET",
 		headers: {
 			accept: "application/json",
-			Authorization: `Bearer ${apiKey}`,
+			Authorization: `Bearer ${apiAccessToken}`,
 		},
 	};
 
@@ -16,6 +15,11 @@ const getMovies = async (query) => {
 		// 1. Aguarde a resposta da requisição HTTP
 		const httpResponse = await fetch(url, options);
 
+		if (!apiAccessToken) {
+			console.error("TMDB_API_ACCESS_TOKEN não está definido. Verifique seu arquivo .env e a configuração do dotenv.");
+			throw new Error("Configuração da API ausente.");
+		}
+		
 		// 2. Verifique se a requisição foi bem-sucedida (status HTTP 200-299)
 		if (!httpResponse.ok) {
 			// Se não foi, logue o erro e o status.
