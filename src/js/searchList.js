@@ -34,12 +34,21 @@ const cardCreator = (movie) => {
   /* cria um card para um filme */
   const movieElement = document.createElement('li')
   movieElement.innerHTML = `
-        <img src="${
-          movie.poster_path
-            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-            : 'https://via.placeholder.com/150'
-        }" alt="${movie.title}">
-        <p>${movie.title}</p>
+            <article class="movie-item">
+                <img  class="movie-poster" src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="">
+                <h2 class="movie-title">${movie.original_title}</h2>
+                
+                <p class="movie-release-date">Lançamento:${movie.release_date}</p>
+                <p class="movie-genre">Gêneros: ${movie.genre_ids}</p>
+                <p class="movie-sinopse">Sinopse: ${movie.overview}</p>
+                
+                <label for="watched-checkmark" class="watched-checkbox">
+                  <input type="checkbox" name="watched" id="watched-checkmark">
+                  <span class="checkmark"></span>
+                </label>
+                
+                <button class="remove-movie">Remover <i class="fa-solid fa-heart-circle-minus"></i></button>    
+            </article>
     `
   return movieElement
 }
