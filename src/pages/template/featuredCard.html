@@ -1,0 +1,15 @@
+<article class="featured-item">
+    <h2 class="featured-title">${movie.original_title}</h2>
+    <img class="features-poster" src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="">
+
+    <p class="featured-release-date">Lançamento:${movie.release_date}</p>
+    <p class="featured-genre">Gêneros: ${movie.genre_ids}</p>
+    <p class="featured-sinopse">Sinopse: ${movie.overview}</p>
+
+    <label for="watched-featured-checkmark${count}" class="watched-featured-checkbox">
+        <input type="checkbox" name="watched" id="watched-featured-checkmark${count}">
+        <span class="checkmark"></span>
+    </label>
+
+    <button class="add-movie">Adicionar a sua watchlist <i class="fa-solid fa-heart-circle-plus"></i></button>
+</article>

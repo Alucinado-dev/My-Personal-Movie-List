@@ -1,0 +1,15 @@
+<article class="movie-item">
+    <h2 class="movie-title">${movie.original_title}</h2>
+    <img class="movie-poster" src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="">
+
+    <p class="movie-release-date">Lançamento:${movie.release_date}</p>
+    <p class="movie-genre">Gêneros: ${movie.genre_ids}</p>
+    <p class="movie-sinopse">Sinopse: ${movie.overview}</p>
+
+    <label for="watched-checkmark${count}" class="watched-checkbox">
+        <input type="checkbox" name="watched" id="watched-checkmark${count}">
+        <span class="checkmark"></span>
+    </label>
+
+    <button class="remove-movie">Remover <i class="fa-solid fa-heart-circle-minus"></i></button>
+</article>

@@ -1,5 +1,6 @@
-import { getMovies } from './getMoviesFromTMDB'
+import getMoviesFromSearch from './apiTmdb'
 import listResults from './app'
+import {listElementCrator} from './globalFunctions'
 
 const isQueryble = (search) => {
   /* verifica se um certo string é queryble, se não há caracteres poribidos em uma query.. etc*/
@@ -30,28 +31,6 @@ const isQueryble = (search) => {
   return true
 }
 
-const cardCreator = (movie) => {
-  /* cria um card para um filme */
-  const movieElement = document.createElement('li')
-  movieElement.innerHTML = `
-            <article class="movie-item">
-                <img  class="movie-poster" src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="">
-                <h2 class="movie-title">${movie.original_title}</h2>
-                
-                <p class="movie-release-date">Lançamento:${movie.release_date}</p>
-                <p class="movie-genre">Gêneros: ${movie.genre_ids}</p>
-                <p class="movie-sinopse">Sinopse: ${movie.overview}</p>
-                
-                <label for="watched-checkmark" class="watched-checkbox">
-                  <input type="checkbox" name="watched" id="watched-checkmark">
-                  <span class="checkmark"></span>
-                </label>
-                
-                <button class="remove-movie">Remover <i class="fa-solid fa-heart-circle-minus"></i></button>    
-            </article>
-    `
-  return movieElement
-}
 
 const customCard = (message, movieListElement = listResults) => {
   /* cria um card customizado para um filme */
@@ -63,16 +42,7 @@ const customCard = (message, movieListElement = listResults) => {
   movieListElement.appendChild(movieElement)
 }
 
-const listElementCrator = (movies, movieListElement) => {
-  if (movies.length === 0) {
-    customCard('nenhum filme encontrado')
-  }
 
-  for (let movie of movies) {
-    const movieCard = cardCreator(movie)
-    movieListElement.appendChild(movieCard)
-  }
-}
 
 const updateMovieList = async (search, movieListElement = listResults) => {
   /* atualiza a lista de filmes mostrada na tela de acordo com a pesquisa */
@@ -83,9 +53,7 @@ const updateMovieList = async (search, movieListElement = listResults) => {
     )
   } else {
     try {
-      const movieList = await getMovies(
-        search
-      ) /* se a promise for concluída isso vai retornar um array de objetos, onde cada objeto é um filme */
+      const movieList = await getMoviesFromSearch(search) /* se a promise for concluída isso vai retornar um array de objetos, onde cada objeto é um filme */
       console.log(movieList)
       /* não precisa fazer destructuring pq o listElementCreator vai usar as inforamções separadamentes pra criar os cards */
       listElementCrator(movieList, movieListElement)
