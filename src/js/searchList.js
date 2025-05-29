@@ -32,15 +32,7 @@ const isQueryble = (search) => {
 }
 
 
-const customCard = (message, movieListElement = listResults) => {
-  /* cria um card customizado para um filme */
-  movieListElement.innerHTML = ''
-  const movieElement = document.createElement('li')
-  movieElement.innerHTML = `
-        <h5>${message}</h5>
-    `
-  movieListElement.appendChild(movieElement)
-}
+
 
 
 
